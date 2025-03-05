@@ -41,4 +41,21 @@ async function insertUser(username,email) {
     }
 }
 
-module.exports = {createUserTable, insertUser};
+async function getUserTable(){
+    const getUSers='SELECT * FROM users'
+
+    try {
+        
+        const result = await db.query(getUSers);
+        console.log('Fetched all users');
+
+        return result.rows
+        
+
+    } catch (error) {
+        console.log('Error getting the table',error);
+        
+    }
+}
+
+module.exports = {createUserTable, insertUser,getUserTable};

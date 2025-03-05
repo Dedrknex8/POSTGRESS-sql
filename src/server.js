@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { createUserTable,insertUser } = require('./concepts/basic-queris')
+const { createUserTable,insertUser,getUserTable } = require('./concepts/basic-queris')
 
 // test  basic queries
 async function testbasicQuery() {
@@ -8,7 +8,10 @@ async function testbasicQuery() {
         
         // await createUserTable()
 
-        await insertUser('make','maker@gmail.com')
+        // await insertUser('make','maker@gmail.com')
+        const allUsers = await getUserTable();
+        console.log('users ->',allUsers);
+        
     } catch (error) {
         console.log(error);
         
