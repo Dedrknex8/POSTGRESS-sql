@@ -20,4 +20,25 @@ async function createUserTable() {
     }
 }
 
-module.exports = {createUserTable};
+async function insertUser(username,email) {
+    
+    const insertUserQuery = `
+    INSERT INTO users (username,email)
+    VALUES ($1,$2) 
+    RETURNING *
+    `
+    try {
+
+        const res = await db.query(insertUserQuery,[username,email])
+        console.log('user inserted successfully',res.rows[0]);
+
+        return res.rows[0]
+        
+
+    } catch (error) {
+        console.log('Error inserting',error);
+        
+    }
+}
+
+module.exports = {createUserTable, insertUser};
