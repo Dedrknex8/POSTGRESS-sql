@@ -19,6 +19,7 @@ async function testbasicQuery() {
 }
 
 async function runAllQuery(){
+    //this will run all the query
     await testbasicQuery()
 }
 runAllQuery();
