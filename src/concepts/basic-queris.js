@@ -81,4 +81,25 @@ async function updateQuery(username,newemail){
         
     }
 }
-module.exports = {createUserTable, insertUser,getUserTable,updateQuery};
+
+async function deleteUser(username){
+    const deleteUserQuery = `
+    DELETE FROM users
+    WHERE username = $1
+    RETURNING *;
+    `
+    
+    try {
+     const result = await db.query(deleteUserQuery,[username]);
+
+     if(result.rows.length > 0){
+        console.log('USer deleted sucessfully');
+        return result.rows[0];
+        
+     }
+    } catch (error) {
+        console.log('Error deleting the user',error);
+        
+    }
+}
+module.exports = {createUserTable, insertUser,getUserTable,updateQuery,deleteUser};
