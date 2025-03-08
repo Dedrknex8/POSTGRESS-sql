@@ -58,4 +58,27 @@ async function getUserTable(){
     }
 }
 
-module.exports = {createUserTable, insertUser,getUserTable};
+//Update  User information
+
+async function updateQuery(username,newemail){
+    const updateUserQuery = `
+    UPDATE users
+    SET email = $2
+    WHERE username = $1
+    RETURNING *
+    `
+    try {
+        const result = await db.query(updateUserQuery,[username,newemail]);
+
+        if(result.rows.length > 0){
+            console.log('User email updated sucessfully');
+            return result.rows[0];
+        }
+
+
+    } catch (error) {
+        console.log(`Error Updating  the record ${error}`);
+        
+    }
+}
+module.exports = {createUserTable, insertUser,getUserTable,updateQuery};
