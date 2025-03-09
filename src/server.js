@@ -3,6 +3,7 @@ require('dotenv').config();
 const { createUserTable,insertUser,getUserTable,updateQuery,deleteUser } = require('./concepts/basic-queris')
 const {getUsersWhere,sotredUers} = require('./concepts/filter-soritng')
 const {createPostTable, insertPost} = require('./concepts/relationships');
+const {getUsersWithPosts} = require('./concepts/joins');
 // test  basic queries
 async function testbasicQuery() {
     try {
@@ -46,13 +47,23 @@ async function filterQuery(){
 async function testRelationship(){
     try {
         // await createPostTable()
-        await insertPost('my new post',"dummy data inserting",4);
+        await insertPost('posts ',"dummy data inserting",5);
     } catch (error) {
         console.log('error',error);
         
     }
 }
-
-testRelationship();
+async function testJoins(){
+    try {
+       const usersWithPosts =  await getUsersWithPosts();
+       console.log(usersWithPosts);
+       
+    } catch (error) {
+        console.log('error',error);
+        
+    }
+}
+testJoins();
+// testRelationship();
 // filterQuery()
 // runAllQuery();
