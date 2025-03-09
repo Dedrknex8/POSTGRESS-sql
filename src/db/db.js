@@ -7,6 +7,7 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
+//A function to fetch and pass query
 async function query(text,params){
     const start = Date.now();
 
