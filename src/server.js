@@ -4,6 +4,7 @@ const { createUserTable,insertUser,getUserTable,updateQuery,deleteUser } = requi
 const {getUsersWhere,sotredUers} = require('./concepts/filter-soritng')
 const {createPostTable, insertPost} = require('./concepts/relationships');
 const {getUsersWithPosts} = require('./concepts/joins');
+const {countPosts}  = require('./concepts/aggregation-concept');
 // test  basic queries
 async function testbasicQuery() {
     try {
@@ -63,7 +64,19 @@ async function testJoins(){
         
     }
 }
-testJoins();
+async function aggregateFunction(){
+    try {
+       const countNoPosts =  await countPosts();
+       console.log(countNoPosts);
+       
+    } catch (error) {
+        console.log('error',error);
+        
+    }
+}
+
+aggregateFunction();
+// testJoins();
 // testRelationship();
 // filterQuery()
 // runAllQuery();
